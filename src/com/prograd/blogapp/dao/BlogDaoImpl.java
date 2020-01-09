@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prograd.blogapp.model.Todo;
+import com.prograd.blogapp.model.Blog;
 import com.prograd.blogapp.utils.JDBCUtils;
 
 /**
@@ -18,7 +18,7 @@ import com.prograd.blogapp.utils.JDBCUtils;
  *  *
  */
 
-public class TodoDaoImpl implements TodoDao {
+public class BlogDaoImpl implements BlogDao {
 
 	private static final String INSERT_TODOS_SQL = "INSERT INTO todos"
 			+ "  (title, username, description, target_date,  is_done) VALUES " + " (?, ?, ?, ?, ?);";
@@ -28,11 +28,11 @@ public class TodoDaoImpl implements TodoDao {
 	private static final String DELETE_TODO_BY_ID = "delete from todos where id = ?;";
 	private static final String UPDATE_TODO = "update todos set title = ?, username= ?, description =?, target_date =?, is_done = ? where id = ?;";
 
-	public TodoDaoImpl() {
+	public BlogDaoImpl() {
 	}
 
 	@Override
-	public void insertTodo(Todo todo) throws SQLException {
+	public void insertTodo(Blog todo) throws SQLException {
 		System.out.println(INSERT_TODOS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = JDBCUtils.getConnection();
@@ -50,8 +50,8 @@ public class TodoDaoImpl implements TodoDao {
 	}
 
 	@Override
-	public Todo selectTodo(long todoId) {
-		Todo todo = null;
+	public Blog selectTodo(long todoId) {
+		Blog todo = null;
 		// Step 1: Establishing a Connection
 		try (Connection connection = JDBCUtils.getConnection();
 				// Step 2:Create a statement using connection object
@@ -69,7 +69,7 @@ public class TodoDaoImpl implements TodoDao {
 				String description = rs.getString("description");
 				LocalDate targetDate = rs.getDate("target_date").toLocalDate();
 				boolean isDone = rs.getBoolean("is_done");
-				todo = new Todo(id, title, username, description, targetDate, isDone);
+				todo = new Blog(id, title, username, description, targetDate, isDone);
 			}
 		} catch (SQLException exception) {
 			JDBCUtils.printSQLException(exception);
@@ -78,10 +78,10 @@ public class TodoDaoImpl implements TodoDao {
 	}
 
 	@Override
-	public List<Todo> selectAllTodos() {
+	public List<Blog> selectAllTodos() {
 
 		// using try-with-resources to avoid closing resources (boiler plate code)
-		List<Todo> todos = new ArrayList<>();
+		List<Blog> todos = new ArrayList<>();
 
 		// Step 1: Establishing a Connection
 		try (Connection connection = JDBCUtils.getConnection();
@@ -100,7 +100,7 @@ public class TodoDaoImpl implements TodoDao {
 				String description = rs.getString("description");
 				LocalDate targetDate = rs.getDate("target_date").toLocalDate();
 				boolean isDone = rs.getBoolean("is_done");
-				todos.add(new Todo(id, title, username, description, targetDate, isDone));
+				todos.add(new Blog(id, title, username, description, targetDate, isDone));
 			}
 		} catch (SQLException exception) {
 			JDBCUtils.printSQLException(exception);
@@ -120,7 +120,7 @@ public class TodoDaoImpl implements TodoDao {
 	}
 
 	@Override
-	public boolean updateTodo(Todo todo) throws SQLException {
+	public boolean updateTodo(Blog todo) throws SQLException {
 		boolean rowUpdated;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_TODO);) {

@@ -14,7 +14,7 @@ import com.prograd.blogapp.dao.LoginDao;
 import com.prograd.blogapp.model.LoginBean;
 
 /**
- * @email Ramesh Fadatare
+ *
  */
 
 @WebServlet("/login")
@@ -45,7 +45,7 @@ public class LoginController extends HttpServlet {
 
 		try {
 			if (loginDao.validate(loginBean)) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-list.jsp");
 				dispatcher.forward(request, response);
 			} else {
 				HttpSession session = request.getSession();

@@ -9,7 +9,7 @@ import java.time.LocalDate;
  *
  *
  */
-public class Todo {
+public class Blog {
 
 	private Long id;
 	private String title;
@@ -18,11 +18,11 @@ public class Todo {
 	private LocalDate targetDate;
 	private boolean status;
 	
-	protected Todo() {
+	protected Blog() {
 		
 	}
 	
-	public Todo(long id, String title, String username, String description, LocalDate targetDate, boolean isDone) {
+	public Blog(long id, String title, String username, String description, LocalDate targetDate, boolean isDone) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -32,7 +32,7 @@ public class Todo {
 		this.status = isDone;
 	}
 
-	public Todo(String title, String username, String description, LocalDate targetDate, boolean isDone) {
+	public Blog(String title, String username, String description, LocalDate targetDate, boolean isDone) {
 		super();
 		this.title = title;
 		this.username = username;
@@ -105,7 +105,7 @@ public class Todo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Todo other = (Todo) obj;
+		Blog other = (Blog) obj;
 		if (id != other.id)
 			return false;
 		return true;

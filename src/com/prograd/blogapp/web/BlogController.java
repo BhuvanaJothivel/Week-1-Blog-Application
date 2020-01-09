@@ -12,24 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.prograd.blogapp.dao.TodoDao;
-import com.prograd.blogapp.dao.TodoDaoImpl;
-import com.prograd.blogapp.model.Todo;
+import com.prograd.blogapp.dao.BlogDao;
+import com.prograd.blogapp.dao.BlogDaoImpl;
+import com.prograd.blogapp.model.Blog;
 
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
  * application, handling all requests from the todo.
  * 
- * @email Ramesh Fadatare
+ * 
  */
 
 @WebServlet("/")
-public class TodoController extends HttpServlet {
+public class BlogController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TodoDao todoDAO;
+	private BlogDao blogDAO;
 
 	public void init() {
-		todoDAO = new TodoDaoImpl();
+		blogDAO = new BlogDaoImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -73,23 +73,23 @@ public class TodoController extends HttpServlet {
 
 	private void listTodo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Todo> listTodo = todoDAO.selectAllTodos();
+		List<Blog> listTodo = blogDAO.selectAllTodos();
 		request.setAttribute("listTodo", listTodo);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-list.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-form.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		Todo existingTodo = todoDAO.selectTodo(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-form.jsp");
+		Blog existingTodo = blogDAO.selectTodo(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-form.jsp");
 		request.setAttribute("todo", existingTodo);
 		dispatcher.forward(request, response);
 
@@ -105,8 +105,8 @@ public class TodoController extends HttpServlet {
 		LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"),df);*/
 		
 		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
-		Todo newTodo = new Todo(title, username, description, LocalDate.now(), isDone);
-		todoDAO.insertTodo(newTodo);
+		Blog newTodo = new Blog(title, username, description, LocalDate.now(), isDone);
+		blogDAO.insertTodo(newTodo);
 		response.sendRedirect("list");
 	}
 
@@ -120,16 +120,16 @@ public class TodoController extends HttpServlet {
 		LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"));
 		
 		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
-		Todo updateTodo = new Todo(id, title, username, description, targetDate, isDone);
+		Blog updateTodo = new Blog(id, title, username, description, targetDate, isDone);
 		
-		todoDAO.updateTodo(updateTodo);
+		blogDAO.updateTodo(updateTodo);
 		
 		response.sendRedirect("list");
 	}
 
 	private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		todoDAO.deleteTodo(id);
+		blogDAO.deleteTodo(id);
 		response.sendRedirect("list");
 	}
 }

@@ -15,8 +15,7 @@ import com.prograd.blogapp.utils.JDBCUtils;
  * This DAO class provides CRUD database operations for the table todos in the
  * database.
  * 
- * @author Ramesh Fadatare
- *
+ *  *
  */
 
 public class TodoDaoImpl implements TodoDao {

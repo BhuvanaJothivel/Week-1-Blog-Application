@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.prograd.blogapp.dao.UserDao;
 import com.prograd.blogapp.model.User;
 
-/**
- * @email Ramesh Fadatare
- */
+
 
 @WebServlet("/register")
 public class UserController extends HttpServlet {

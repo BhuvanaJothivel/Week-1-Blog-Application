@@ -1,4 +1,4 @@
-Week-1 Complete Application
+Week-1 Blog Application
 
 
 Lab 1 | Sign Up and Sign In

@@ -1,22 +1,40 @@
 package com.prograd.blogapp.utils;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Properties;
 
 public class JDBCUtils {
 
-	private static String jdbcURL = "jdbc:mysql://localhost:3306/myblog";
-	private static String jdbcUsername = "root";
-	private static String jdbcPassword = "your_password";
+	public static Properties loadPropertiesFile() throws Exception {
+		Properties prop = new Properties();
+		InputStream in = JDBCUtils.class.getClassLoader().getResourceAsStream("jdbc.properties");
+		prop.load(in);
+		in.close(); 
+		return prop;
+	}
 
 	public static Connection getConnection() {
 		Connection connection = null;
+		Properties prop = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+			prop = loadPropertiesFile();
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		final String driver = prop.getProperty("driver");
+		final String url = prop.getProperty("url");
+		final String username = prop.getProperty("username");
+		final String password = prop.getProperty("password");
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

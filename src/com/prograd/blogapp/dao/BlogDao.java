@@ -15,6 +15,6 @@ public interface BlogDao {
 
 	boolean deleteBlog(int id) throws SQLException;
 
-	boolean updateBlog(Blog todo) throws SQLException;
+	boolean updateBlog(Blog todo) throws SQLException, Exception;
 
 }

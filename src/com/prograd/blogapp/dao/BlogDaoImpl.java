@@ -32,7 +32,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public void insertBlog(Blog todo) throws SQLException {
+	public void insertBlog(Blog todo) {
 		System.out.println(INSERT_TODOS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = JDBCUtils.getConnection();
@@ -120,7 +120,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public boolean updateBlog(Blog todo) throws SQLException {
+	public boolean updateBlog(Blog todo) throws Exception {
 		boolean rowUpdated;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_TODO);) {

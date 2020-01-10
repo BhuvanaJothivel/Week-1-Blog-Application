@@ -122,7 +122,12 @@ public class BlogController extends HttpServlet {
 		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
 		Blog updateTodo = new Blog(id, title, username, description, targetDate, isDone);
 		
-		blogDAO.updateBlog(updateTodo);
+		try {
+			blogDAO.updateBlog(updateTodo);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 		response.sendRedirect("list");
 	}

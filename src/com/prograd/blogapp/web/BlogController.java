@@ -47,19 +47,19 @@ public class BlogController extends HttpServlet {
 				showNewForm(request, response);
 				break;
 			case "/insert":
-				insertTodo(request, response);
+				insertBlog(request, response);
 				break;
 			case "/delete":
-				deleteTodo(request, response);
+				deleteBlog(request, response);
 				break;
 			case "/edit":
 				showEditForm(request, response);
 				break;
 			case "/update":
-				updateTodo(request, response);
+				updateBlog(request, response);
 				break;
 			case "/list":
-				listTodo(request, response);
+				listBlog(request, response);
 				break;
 			default:
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
@@ -71,10 +71,10 @@ public class BlogController extends HttpServlet {
 		}
 	}
 
-	private void listTodo(HttpServletRequest request, HttpServletResponse response)
+	private void listBlog(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Blog> listTodo = blogDAO.selectAllTodos();
-		request.setAttribute("listTodo", listTodo);
+		List<Blog> listTodo = blogDAO.selectAllBlogs();
+		request.setAttribute("listBlog", listTodo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-list.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -88,14 +88,14 @@ public class BlogController extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		Blog existingTodo = blogDAO.selectTodo(id);
+		Blog existingTodo = blogDAO.selectBlog(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("blog/blog-form.jsp");
 		request.setAttribute("todo", existingTodo);
 		dispatcher.forward(request, response);
 
 	}
 
-	private void insertTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void insertBlog(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		
 		String title = request.getParameter("title");
 		String username = request.getParameter("username");
@@ -106,11 +106,11 @@ public class BlogController extends HttpServlet {
 		
 		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
 		Blog newTodo = new Blog(title, username, description, LocalDate.now(), isDone);
-		blogDAO.insertTodo(newTodo);
+		blogDAO.insertBlog(newTodo);
 		response.sendRedirect("list");
 	}
 
-	private void updateTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void updateBlog(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		String title = request.getParameter("title");
@@ -122,14 +122,14 @@ public class BlogController extends HttpServlet {
 		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
 		Blog updateTodo = new Blog(id, title, username, description, targetDate, isDone);
 		
-		blogDAO.updateTodo(updateTodo);
+		blogDAO.updateBlog(updateTodo);
 		
 		response.sendRedirect("list");
 	}
 
-	private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void deleteBlog(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		blogDAO.deleteTodo(id);
+		blogDAO.deleteBlog(id);
 		response.sendRedirect("list");
 	}
 }

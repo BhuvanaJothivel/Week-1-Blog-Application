@@ -7,14 +7,14 @@ import com.prograd.blogapp.model.Blog;
 
 public interface BlogDao {
 
-	void insertTodo(Blog todo) throws SQLException;
+	void insertBlog(Blog todo) throws SQLException;
 
-	Blog selectTodo(long todoId);
+	Blog selectBlog(long todoId);
 
-	List<Blog> selectAllTodos();
+	List<Blog> selectAllBlogs();
 
-	boolean deleteTodo(int id) throws SQLException;
+	boolean deleteBlog(int id) throws SQLException;
 
-	boolean updateTodo(Blog todo) throws SQLException;
+	boolean updateBlog(Blog todo) throws SQLException;
 
 }

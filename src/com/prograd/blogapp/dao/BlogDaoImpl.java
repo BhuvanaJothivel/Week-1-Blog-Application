@@ -32,7 +32,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public void insertTodo(Blog todo) throws SQLException {
+	public void insertBlog(Blog todo) throws SQLException {
 		System.out.println(INSERT_TODOS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = JDBCUtils.getConnection();
@@ -50,7 +50,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public Blog selectTodo(long todoId) {
+	public Blog selectBlog(long todoId) {
 		Blog todo = null;
 		// Step 1: Establishing a Connection
 		try (Connection connection = JDBCUtils.getConnection();
@@ -78,7 +78,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public List<Blog> selectAllTodos() {
+	public List<Blog> selectAllBlogs() {
 
 		// using try-with-resources to avoid closing resources (boiler plate code)
 		List<Blog> todos = new ArrayList<>();
@@ -109,7 +109,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public boolean deleteTodo(int id) throws SQLException {
+	public boolean deleteBlog(int id) throws SQLException {
 		boolean rowDeleted;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_TODO_BY_ID);) {
@@ -120,7 +120,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public boolean updateTodo(Blog todo) throws SQLException {
+	public boolean updateBlog(Blog todo) throws SQLException {
 		boolean rowUpdated;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_TODO);) {

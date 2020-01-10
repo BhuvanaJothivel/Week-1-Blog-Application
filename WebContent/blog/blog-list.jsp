@@ -49,26 +49,27 @@
 				<thead>
 					<tr>
 						<th>Title</th>
+						<th>Description</th>
 						<th>Posted Date</th>
 						<th>Blog Status</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!--   for (Todo todo: todos) {  -->
-					<c:forEach var="todo" items="${listTodo}">
+					
+					<c:forEach var="blog" items="${listBlog}">
 
 						<tr>
-							<td><c:out value="${todo.title}" /></td>
-							<td><c:out value="${todo.targetDate}" /></td>
-							<td><c:out value="${todo.status}" /></td>
+							<td><c:out value="${blog.title}" /></td>
+							<td><c:out value="${blog.description}" /></td>
+							<td><c:out value="${blog.targetDate}" /></td>
+							<td><c:out value="${blog.status}" /></td>
 
-							<td><a href="edit?id=<c:out value='${todo.id}' />">Edit</a>
+							<td><a href="edit?id=<c:out value='${blog.id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?id=<c:out value='${todo.id}' />">Delete</a></td>
+								href="delete?id=<c:out value='${blog.id}' />">Delete</a></td>
 
-							<!--  <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
-          							<button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td> -->
+							
 						</tr>
 					</c:forEach>
 					<!-- } -->

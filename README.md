@@ -28,6 +28,16 @@ If there is no server present in the Targeted Runtimes window, click New -> Now 
 Database Configuration:
 Go to src->open jdbc.properties -> change the password according to your mysql server password.
 
+There is a script.sql file in your Project folder. Open it and execute it in your mysql workbench. If you are unable to run the sql file.
+Open the file in notepad. 
+Go to mysql workbench. Open up the database connection by giving your root password. Click select new sql tab and run the following queries
+//-------Creating the database------//
+create Database myblog;
+use myblog;
+select the script.sql queries and execute in script editor.
+
+//---------------------------------//
+
 Voila! you are ready to go.
 
 Click on the project and select Run on Server. If everything is right then your application starts smoothly.

@@ -32,12 +32,3 @@ Voila! you are ready to go.
 
 Click on the project and select Run on Server. If everything is right then your application starts smoothly.
 
-
-
-
-
-
-
-
-
-

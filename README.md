@@ -26,7 +26,7 @@ Right click on the application -> select properties -> Select Targeted Runtimes 
 If there is no server present in the Targeted Runtimes window, click New -> Now select Apache folder -> from the list of Apache Tomcat server select Apache Tomcat v9.0 or v9.5 and then select tomcat installation directory. Select the location of your tomcat server directory and click finish.
 
 Database Configuration:
-Go to src->com.prograd.blogapp.utils -> Click JDBC utils and change the jdbcPassword according to your mysql server password.
+Go to src->open jdbc.properties -> change the password according to your mysql server password.
 
 Voila! you are ready to go.
 
